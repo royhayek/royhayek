@@ -3,7 +3,7 @@ import { BsFillMoonStarsFill } from "react-icons/bs";
 
 const Navbar = ({ darkMode, setDarkMode }) => {
   return (
-    <nav className="py-10 mb-12 flex justify-between dark:text-white">
+    <nav className="py-10 md:mb-12 flex justify-between dark:text-white">
       <h1 className="text-xl font-burtons">Portfolio</h1>
       <ul className="flex items-center">
         <li>

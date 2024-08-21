@@ -99,15 +99,15 @@ export default function Home() {
   return (
     <main>
       <section className="min-h-screen">
-        <div className="text-center p-10 py-10 flex flex-col items-center">
+        <div className="text-center md:p-10 py-10 flex flex-col items-center">
           <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400">Roy el Hayek</h2>
           <h3 className="text-2xl py-2  dark:text-white">Frontend Developer</h3>
-          <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 w-1/2">
+          <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 md:w-1/2">
             Frontend Developer specializing in mobile and web solutions with React and React Native, bringing over 4
             years of experience
           </p>
         </div>
-        <div className="text-5xl flex justify-center gap-16 py-3 text-gray-600">
+        <div className="text-5xl flex justify-center gap-16 md:py-3 text-gray-600">
           {/* <AiFillTwitterCircle /> */}
           <AiFillLinkedin
             className="cursor-pointer"
@@ -175,8 +175,9 @@ export default function Home() {
           <p className="text-md py-2 text-gray-800 dark:text-gray-200">
             Since the beginning of my freelance career, I have primarily built portfolio projects using React and React
             Native. Although some projects were developed using Flutter or other technologies, they are not listed here.
-            I&rsquo;ve worked remotely for companies and as a freelancer, as well as on-site in Lebanon and KSA, collaborating
-            with talented individuals to create innovative digital products for both business and consumer use.
+            I&rsquo;ve worked remotely for companies and as a freelancer, as well as on-site in Lebanon and KSA,
+            collaborating with talented individuals to create innovative digital products for both business and consumer
+            use.
           </p>
           <p className="text-md py-2 text-gray-800 dark:text-gray-200">Explore a sample of my work below.</p>
         </div>
@@ -191,7 +192,7 @@ export default function Home() {
                 src={item.src}
                 alt={item.alt}
               />
-              <div className="p-4">
+              <div className="py-4 px-2 md:p-4">
                 <p className="text-lg font-semibold dark:text-white">{item.title}</p>
                 <p className="text-gray-600 mt-2 dark:text-gray-400">{item.description}</p>
               </div>
