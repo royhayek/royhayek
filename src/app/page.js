@@ -175,7 +175,7 @@ export default function Home() {
           <p className="text-md py-2 text-gray-800 dark:text-gray-200">
             Since the beginning of my freelance career, I have primarily built portfolio projects using React and React
             Native. Although some projects were developed using Flutter or other technologies, they are not listed here.
-            I've worked remotely for companies and as a freelancer, as well as on-site in Lebanon and KSA, collaborating
+            I&rsquo;ve worked remotely for companies and as a freelancer, as well as on-site in Lebanon and KSA, collaborating
             with talented individuals to create innovative digital products for both business and consumer use.
           </p>
           <p className="text-md py-2 text-gray-800 dark:text-gray-200">Explore a sample of my work below.</p>

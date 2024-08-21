@@ -3,7 +3,7 @@ const Footer = () => {
     <>
       <hr />
       <div className="flex items-center py-8">
-        <p className="text-sm text-gray-600">© {new Date().getFullYear()} Roy's Portfolio</p>
+        <p className="text-sm text-gray-600">© {new Date().getFullYear()} Roy&rsquo;s Portfolio</p>
       </div>
     </>
   );
