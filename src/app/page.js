@@ -14,6 +14,7 @@ import mob4 from "../../public/mob4.png";
 import mob5 from "../../public/mob5.png";
 import mob6 from "../../public/mob6.png";
 import mob7 from "../../public/mob7.png";
+import mob8 from "../../public/mob8.png";
 import avatar from "../../public/avatar.jpeg";
 
 export default function Home() {
@@ -22,6 +23,14 @@ export default function Home() {
   };
 
   const portfolio = [
+    {
+      alt: "Mojo Wallet App",
+      src: mob8,
+      title: "Mojo Wallet App",
+      description:
+        "Leaded the development of a mobile wallet application that allows users to manage their finances, make payments, and track expenses seamlessly and more.",
+      website: "https://www.mojo.com.lb/",
+    },
     {
       alt: "Aljazira Tadawul",
       src: web1,
@@ -103,7 +112,7 @@ export default function Home() {
           <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400">Roy el Hayek</h2>
           <h3 className="text-2xl py-2  dark:text-white">Frontend Developer</h3>
           <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 md:w-1/2">
-            Frontend Developer specializing in mobile and web solutions with React and React Native, bringing over 4
+            Frontend Developer specializing in mobile and web solutions with React and React Native, bringing over 5
             years of experience
           </p>
         </div>
@@ -185,10 +194,9 @@ export default function Home() {
           {portfolio.map((item, index) => (
             <div key={index} onClick={() => handleImageClick(item.website)} className="basis-1/3 flex-1 cursor-pointer">
               <Image
-                className="object-cover rounded-xl border-1.5"
-                width={"100%"}
-                height={"100%"}
-                layout="responsive"
+                className="object-contain rounded-xl border-1.5 w-full h-96"
+                width={400}
+                height={256}
                 src={item.src}
                 alt={item.alt}
               />
