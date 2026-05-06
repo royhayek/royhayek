@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import RevealSection from "./RevealSection";
 import AnimatedDivider from "./AnimatedDivider";
 import dynamic from "next/dynamic";
 
@@ -20,7 +19,7 @@ function Dot() {
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
       whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="w-4 h-4 rounded-full bg-teal-500 border-[3px] border-white dark:border-[#0d1117] relative z-10 flex-shrink-0"
       style={{ boxShadow: "0 0 14px rgba(20,184,166,0.7)" }}
@@ -35,8 +34,8 @@ function Card({ exp, fromLeft }) {
     <motion.div
       initial={{ opacity: 0, x: fromLeft ? -50 : 50, y: 20 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       className="glass-card rounded-2xl p-6 w-full"
     >
       <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
@@ -85,8 +84,8 @@ function MapPanel({ exp, fromLeft }) {
     <motion.div
       initial={{ opacity: 0, x: fromLeft ? -40 : 40 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
       className="flex items-center justify-center h-full min-h-[200px] opacity-70 hover:opacity-100 transition-opacity duration-500 overflow-visible"
     >
       {countryCode && (
@@ -136,14 +135,14 @@ export default function Experience({ experiences, tx }) {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <RevealSection id="experience" className="max-w-6xl mx-auto px-6 md:px-10 py-16 pb-24">
+    <section id="experience" className="max-w-6xl mx-auto px-6 md:px-10 py-16 pb-24">
       <AnimatedDivider className="mb-16" />
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="mb-14"
       >
         <p className="text-teal-500 dark:text-teal-400 text-sm font-medium tracking-widest uppercase mb-3">
@@ -184,6 +183,6 @@ export default function Experience({ experiences, tx }) {
           <ExperienceItem key={i} exp={exp} index={i} />
         ))}
       </div>
-    </RevealSection>
+    </section>
   );
 }

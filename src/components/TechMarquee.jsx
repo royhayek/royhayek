@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import {
   SiReact,
   SiTypescript,
@@ -49,18 +48,14 @@ function Row() {
 export default function TechMarquee() {
   return (
     <div className="relative py-10 overflow-hidden select-none">
-      {/* edge fade masks */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-[var(--bg)] to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-[var(--bg)] to-transparent" />
 
-      <motion.div
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ duration: 35, ease: "linear", repeat: Infinity }}
-        className="flex w-max"
-      >
+      {/* Pure CSS marquee — zero JS, GPU-composited transform */}
+      <div className="flex w-max" style={{ animation: "marquee 35s linear infinite" }}>
         <Row />
         <Row />
-      </motion.div>
+      </div>
     </div>
   );
 }

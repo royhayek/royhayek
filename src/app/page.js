@@ -18,15 +18,16 @@ import {
   SiMui,
 } from "react-icons/si";
 import dynamic from "next/dynamic";
-import RevealSection from "@/components/RevealSection";
 import AnimatedDivider from "@/components/AnimatedDivider";
 import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
 
+// ParticleBackground and ContactForm need ssr:false (browser-only APIs: canvas, emailjs)
+// Portfolio/Experience are content sections — must be SSR'd so the HTML exists before JS loads
 const ParticleBackground = dynamic(() => import("@/components/ParticleBackground"), { ssr: false });
 const TechMarquee = dynamic(() => import("@/components/TechMarquee"), { ssr: false });
-const Portfolio = dynamic(() => import("@/components/Portfolio"), { ssr: false });
-const Experience = dynamic(() => import("@/components/Experience"), { ssr: false });
+const Portfolio = dynamic(() => import("@/components/Portfolio"));
+const Experience = dynamic(() => import("@/components/Experience"));
 const ContactForm = dynamic(() => import("@/components/ContactForm"), { ssr: false });
 import { useApp } from "@/context/AppContext";
 import { t } from "@/lib/translations";
@@ -91,9 +92,9 @@ export default function Home() {
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 pb-10">
         <ParticleBackground />
 
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-teal-500/5 blur-[120px]" />
-          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[80px]" />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden hidden md:block">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-teal-500/5 blur-[80px]" />
+          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[60px]" />
         </div>
 
         <div className="relative z-10 flex flex-col items-center gap-6 max-w-3xl mx-auto">
@@ -137,7 +138,7 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="text-5xl md:text-7xl font-bold tracking-tight"
           >
-            <span className="gradient-text inline-block">
+            <span className="gradient-text inline-block pb-2">
               <ScrambleText text="Roy El Hayek" startDelayFrames={6} />
             </span>
           </motion.h1>
@@ -220,15 +221,15 @@ export default function Home() {
       </section>
 
       {/* ══════════ ABOUT ══════════ */}
-      <RevealSection id="about" className="max-w-6xl mx-auto px-6 md:px-10 py-20">
+      <section id="about" className="max-w-6xl mx-auto px-6 md:px-10 py-20">
         <AnimatedDivider className="mb-16" />
 
         <div className="grid md:grid-cols-2 gap-14 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-teal-500 dark:text-teal-400 text-sm font-medium tracking-widest uppercase mb-3">
               {tx.about_label}
@@ -245,10 +246,10 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-xs font-medium tracking-widest uppercase mb-5" style={{ color: "var(--text-muted)" }}>
               {tx.about_tech}
@@ -257,11 +258,11 @@ export default function Home() {
               {skills.map(({ icon, label }, i) => (
                 <motion.div
                   key={label}
-                  initial={{ opacity: 0, scale: 0.7, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.06, type: "spring", stiffness: 220, damping: 18 }}
-                  whileHover={{ y: -4, scale: 1.05 }}
+                  transition={{ delay: 0.1 + i * 0.04, duration: 0.4, ease: "easeOut" }}
+                  whileHover={{ y: -3 }}
                   className="skill-badge flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm"
                 >
                   <span className="text-teal-500 dark:text-teal-400 text-base">{icon}</span>
@@ -271,7 +272,7 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-      </RevealSection>
+      </section>
 
       {/* ══════════ TECH MARQUEE ══════════ */}
       <TechMarquee />

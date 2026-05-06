@@ -3,6 +3,7 @@ export const t = {
     // Navbar
     nav_about: "À propos",
     nav_portfolio: "Portfolio",
+    nav_experience: "Expérience",
     nav_contact: "Contact",
     nav_resume: "Télécharger mon CV",
     nav_resume_short: "CV",
@@ -189,6 +190,7 @@ export const t = {
     // Navbar
     nav_about: "About",
     nav_portfolio: "Portfolio",
+    nav_experience: "Experience",
     nav_contact: "Contact",
     nav_resume: "Download Resume",
     nav_resume_short: "Resume",

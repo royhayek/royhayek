@@ -9,6 +9,9 @@ export default function CustomCursor() {
   const rafRef = useRef(null);
 
   useEffect(() => {
+    // No cursor on touch devices
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
+
     const dot = dotRef.current;
     const ringEl = ringRef.current;
     if (!dot || !ringEl) return;

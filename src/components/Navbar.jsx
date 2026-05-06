@@ -26,6 +26,7 @@ const Navbar = () => {
   const links = [
     { label: tx.nav_about, href: "#about" },
     { label: tx.nav_portfolio, href: "#portfolio" },
+    { label: tx.nav_experience, href: "#experience" },
     { label: tx.nav_contact, href: "#contact" },
   ];
 
@@ -68,7 +69,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-6 md:px-10 flex justify-between items-center">
         {/* Logo */}
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link href="/" className="text-2xl font-burtons gradient-text select-none">
+          <Link href="/" className="text-2xl font-space-grotesk font-bold gradient-text select-none">
             Portfolio
           </Link>
         </motion.div>

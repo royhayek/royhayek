@@ -22,7 +22,7 @@ const Footer = () => {
           className="flex flex-col md:flex-row items-center justify-between gap-8"
         >
           <div>
-            <p className="text-2xl font-burtons gradient-text mb-1">Roy El Hayek</p>
+            <p className="text-2xl font-space-grotesk font-bold gradient-text mb-1">Roy El Hayek</p>
             <p className="text-sm" style={{ color: "var(--text-muted)" }}>
               {tx.footer_role}
             </p>

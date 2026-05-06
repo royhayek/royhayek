@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'burtons';
-  src: url('../../public/Burtons.otf');
-}
-
 /* ── CSS variables: light defaults / dark overrides ── */
 :root {
   --bg: #f8fafc;
@@ -219,6 +214,27 @@ body {
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-18px); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Mobile: drop expensive backdrop blurs ── */
+@media (max-width: 767px) {
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* ── Respect reduced motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text { animation: none; }
+  .shimmer-text { animation: none; }
+  .glow-ring { animation: none; }
+  [style*="float"] { animation: none !important; }
+  [style*="marquee"] { animation-play-state: paused !important; }
 }
 
 @layer utilities {
