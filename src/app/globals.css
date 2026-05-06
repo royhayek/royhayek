@@ -2,34 +2,225 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 @font-face {
   font-family: 'burtons';
   src: url('../../public/Burtons.otf');
+}
+
+/* ── CSS variables: light defaults / dark overrides ── */
+:root {
+  --bg: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --card-hover-border: rgba(20, 184, 166, 0.45);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  --card-hover-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --nav-bg: rgba(248, 250, 252, 0.88);
+  --nav-border: rgba(0, 0, 0, 0.06);
+  --skill-bg: rgba(20, 184, 166, 0.08);
+  --skill-border: rgba(20, 184, 166, 0.22);
+  --divider: rgba(20, 184, 166, 0.28);
+  --teal: #0d9488;
+  --cursor-mix: normal;
+}
+
+.dark {
+  --bg: #030712;
+  --card-bg: rgba(13, 17, 23, 0.65);
+  --card-border: rgba(20, 184, 166, 0.12);
+  --card-hover-border: rgba(20, 184, 166, 0.42);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --card-hover-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-muted: #6b7280;
+  --nav-bg: rgba(3, 7, 18, 0.88);
+  --nav-border: rgba(20, 184, 166, 0.1);
+  --skill-bg: rgba(20, 184, 166, 0.08);
+  --skill-border: rgba(20, 184, 166, 0.22);
+  --divider: rgba(20, 184, 166, 0.32);
+  --teal: #14b8a6;
+  --cursor-mix: difference;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #14b8a6, #06b6d4);
+  border-radius: 4px;
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #14b8a6, #06b6d4, #818cf8);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* ── Glassmorphism card ── */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* ── Ambient background ── */
+.ambient-bg {
+  background:
+    radial-gradient(ellipse at 15% 40%, rgba(20,184,166,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(6,182,212,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 85%, rgba(129,140,248,0.04) 0%, transparent 55%),
+    var(--bg);
+  transition: background 0.35s ease;
+}
+
+/* ── Custom cursor ── */
+.c-cursor {
+  width: 10px;
+  height: 10px;
+  background: var(--teal);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: var(--cursor-mix);
+  transition: transform 0.1s ease;
+  will-change: left, top;
+}
+.c-follower {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(20,184,166,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transition: all 0.14s ease;
+  will-change: left, top;
+}
+
+/* ── Section divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--divider), transparent);
+}
+
+/* ── Shimmer text ── */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #14b8a6 0%, #06b6d4 25%, #e2e8f0 50%, #06b6d4 75%, #14b8a6 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Skill badge ── */
+.skill-badge {
+  background: var(--skill-bg);
+  border: 1px solid var(--skill-border);
+  color: var(--text-secondary);
+  transition: all 0.25s ease;
+}
+.skill-badge:hover {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: rgba(20, 184, 166, 0.5);
+  transform: translateY(-2px);
+}
+
+/* ── Glow ring (avatar) ── */
+.glow-ring {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* ── Lang/Theme toggle buttons ── */
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.toggle-btn:hover {
+  border-color: rgba(20,184,166,0.45);
+  color: #14b8a6;
+  background: rgba(20,184,166,0.08);
+}
+
+/* ── Lang pill ── */
+.lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+.lang-pill:hover {
+  border-color: rgba(20,184,166,0.45);
+  color: #14b8a6;
+}
+.lang-pill .active-lang {
+  color: #14b8a6;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(20,184,166,0.35), 0 0 50px rgba(20,184,166,0.12); }
+  50% { box-shadow: 0 0 50px rgba(20,184,166,0.65), 0 0 100px rgba(6,182,212,0.3); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-18px); }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
 }

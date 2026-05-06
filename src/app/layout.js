@@ -6,8 +6,8 @@ import Layout from "@/components/Layout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Roy el Hayek's Portfolio",
-  description: "Portfolio of Roy el Hayek, a software engineer based in Lebanon.",
+  title: "Roy El Hayek's Portfolio",
+  description: "Portfolio of Roy El Hayek, a software engineer based in Lebanon.",
 };
 
 export default function RootLayout({ children }) {

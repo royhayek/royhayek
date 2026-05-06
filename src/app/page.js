@@ -1,10 +1,36 @@
 "use client";
-import { AiFillFacebook, AiFillLinkedin, AiFillTwitterCircle } from "react-icons/ai";
 import Image from "next/image";
-import deved from "../../public/dev-ed-wave.png";
-import code from "../../public/code.png";
-import design from "../../public/design.png";
-import consulting from "../../public/consulting.png";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import { AiFillLinkedin } from "react-icons/ai";
+import { FiArrowDown } from "react-icons/fi";
+import {
+  SiReact,
+  SiTypescript,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiPython,
+  SiPytorch,
+  SiJavascript,
+  SiPostgresql,
+  SiMongodb,
+  SiMui,
+} from "react-icons/si";
+import dynamic from "next/dynamic";
+import RevealSection from "@/components/RevealSection";
+import AnimatedDivider from "@/components/AnimatedDivider";
+import ScrambleText from "@/components/ScrambleText";
+import Magnetic from "@/components/Magnetic";
+
+const ParticleBackground = dynamic(() => import("@/components/ParticleBackground"), { ssr: false });
+const TechMarquee = dynamic(() => import("@/components/TechMarquee"), { ssr: false });
+const Portfolio = dynamic(() => import("@/components/Portfolio"), { ssr: false });
+const Experience = dynamic(() => import("@/components/Experience"), { ssr: false });
+const ContactForm = dynamic(() => import("@/components/ContactForm"), { ssr: false });
+import { useApp } from "@/context/AppContext";
+import { t } from "@/lib/translations";
+
 import web1 from "../../public/web1.png";
 import web2 from "../../public/web2.png";
 import mob1 from "../../public/mob1.png";
@@ -15,201 +41,249 @@ import mob5 from "../../public/mob5.png";
 import mob6 from "../../public/mob6.png";
 import mob7 from "../../public/mob7.png";
 import mob8 from "../../public/mob8.png";
-import avatar from "../../public/avatar.jpeg";
+import mob9 from "../../public/mob9.png";
+import avatar from "../../public/avatar.jpg";
 
+const portfolioImages = [mob9, mob8, web1, mob7, mob1, mob2, web2, mob3, mob4, mob5, mob6];
+const portfolioWebsites = [
+  "https://apps.apple.com/fr/app/buitanda/id1500280115",
+  "https://www.mojo.com.lb/",
+  "https://www.aljaziratadawul.com/",
+  "https://apps.apple.com/qa/app/aljazira-capital/id6445973979",
+  "https://apps.apple.com/us/app/hello-curious/id1642046057",
+  "https://apps.apple.com/us/app/avandra-ai-trip-planner/id6502790120",
+  "https://avandraapp.com/cms",
+  "https://apps.apple.com/lb/app/roadster-diner/id1350373136/",
+  "https://apps.apple.com/lb/app/deek-duke-go/id1205636562",
+  "https://apps.apple.com/lb/app/bartartine/id1534420141",
+  "https://apps.apple.com/lb/app/zaatar-w-zeit/id1166494577?platform=iphone",
+];
+
+const skills = [
+  { icon: <SiJavascript />, label: "JavaScript" },
+  { icon: <SiTypescript />, label: "TypeScript" },
+  { icon: <SiReact />, label: "React" },
+  { icon: <SiReact />, label: "React Native" },
+  { icon: <SiNextdotjs />, label: "Next.js" },
+  { icon: <SiPython />, label: "Python" },
+  { icon: <SiPytorch />, label: "PyTorch" },
+  { icon: <SiNodedotjs />, label: "Node.js" },
+  { icon: <SiPostgresql />, label: "PostgreSQL" },
+  { icon: <SiMongodb />, label: "MongoDB" },
+  { icon: <SiTailwindcss />, label: "Tailwind CSS" },
+  { icon: <SiMui />, label: "Material UI" },
+];
+
+/* ─── Page ─── */
 export default function Home() {
-  const handleImageClick = (website) => {
-    window.open(website, "_blank");
-  };
+  const { lang } = useApp();
+  const tx = t[lang];
 
-  const portfolio = [
-    {
-      alt: "Mojo Wallet App",
-      src: mob8,
-      title: "Mojo Wallet App",
-      description:
-        "Leaded the development of a mobile wallet application that allows users to manage their finances, make payments, and track expenses seamlessly and more.",
-      website: "https://www.mojo.com.lb/",
-    },
-    {
-      alt: "Aljazira Tadawul",
-      src: web1,
-      title: "Aljazira Tadawul",
-      description:
-        "A stock trading website developed with React for Aljazira Capital, KSA, featuring real-time market data, interactive charts, and secure trading functionalities to enhance the user experience and facilitate seamless transactions",
-      website: "https://www.aljaziratadawul.com/",
-    },
-    {
-      alt: "Aljazira Tadawul",
-      src: mob7,
-      title: "Aljazira Tadawul",
-      description:
-        "A stock trading app created with React Native for Aljazira Capital, KSA, offering a user-friendly interface, real-time stock updates, and advanced trading tools, designed for on-the-go access and efficient portfolio management.",
-      website: "https://apps.apple.com/qa/app/aljazira-capital/id6445973979",
-    },
-    {
-      alt: "CMS for Avandra",
-      src: web2,
-      title: "CMS for Avandra",
-      description:
-        "I developed a CMS for the Avandra AI Trip Planner, enabling seamless analytics, content management, and modification. The system allows for real-time updates, user engagement tracking, and efficient management of travel preferences and destination content.",
-      website: "https://avandraapp.com/cms",
-    },
-    {
-      alt: "Avandra: AI Trip Planner",
-      src: mob2,
-      title: "Avandra: AI Trip Planner",
-      description:
-        "Avandra is one of my personal projects built with React Native. It simplifies travel planning by using AI to create a complete itinerary for your desired destination.",
-      website: "https://apps.apple.com/us/app/avandra-ai-trip-planner/id6502790120",
-    },
-    {
-      alt: "Hello Curious",
-      src: mob1,
-      title: "Hello Curious",
-      description:
-        "Hello Curious was one of my freelance projects built using React Native. It allows people to discover and unlock experiences they can enjoy alone or with family and friends.",
-      website: "https://apps.apple.com/us/app/hello-curious/id1642046057",
-    },
-    {
-      alt: "Roadster Diner",
-      src: mob3,
-      title: "Roadster Diner",
-      description:
-        "I had the opportunity to work on the Roadster Diner app using React Native, focusing particularly on the loyalty feature, spinning wheel, and wallet-based bill payment.",
-      website: "https://apps.apple.com/lb/app/roadster-diner/id1350373136/",
-    },
-    {
-      alt: "Deek Duke",
-      src: mob4,
-      title: "Deek Duke",
-      description:
-        "I had the opportunity to work on the Deek Duke app using React Native, focusing particularly on the wallet-based bill payment, coupon system, and loyalty feature.",
-      website: "https://apps.apple.com/lb/app/deek-duke-go/id1205636562",
-    },
-    {
-      alt: "Bartartine",
-      src: mob5,
-      title: "Bartartine",
-      description:
-        "I had the opportunity to work on the Bartartine app using React Native, focusing particularly on the loyalty feature, wallet-based bill payment, bug fixes, and performance improvements.",
-      website: "https://apps.apple.com/lb/app/bartartine/id1534420141",
-    },
-    {
-      alt: "Zaatar w Zeit",
-      src: mob6,
-      title: "Zaatar w Zeit",
-      description:
-        "I had the opportunity to work on the Zaatar w Zeit app (LB & KSA) using React Native, focusing particularly on the wallet-based bill payment, bug fixes, and performance improvements.",
-      website: "https://apps.apple.com/lb/app/zaatar-w-zeit/id1166494577?platform=iphone",
-    },
-  ];
+  const portfolio = tx.projects.map((proj, i) => ({
+    ...proj,
+    src: portfolioImages[i],
+    website: portfolioWebsites[i],
+  }));
 
   return (
-    <main>
-      <section className="min-h-screen">
-        <div className="text-center md:p-10 py-10 flex flex-col items-center">
-          <h2 className="text-5xl py-2 text-teal-600 font-medium dark:text-teal-400">Roy el Hayek</h2>
-          <h3 className="text-2xl py-2  dark:text-white">Frontend Developer</h3>
-          <p className="text-md py-5 leading-8 text-gray-800 dark:text-gray-200 md:w-1/2">
-            Frontend Developer specializing in mobile and web solutions with React and React Native, bringing over 5
-            years of experience
-          </p>
-        </div>
-        <div className="text-5xl flex justify-center gap-16 md:py-3 text-gray-600">
-          {/* <AiFillTwitterCircle /> */}
-          <AiFillLinkedin
-            className="cursor-pointer"
-            onClick={() => window.open("https://www.linkedin.com/in/roy-el-hayek-74979b152/", "_blank")}
-          />
-          {/* <AiFillFacebook /> */}
-        </div>
-        <div className="relative mx-auto bg-gradient-to-b from-teal-500 to-white rounded-full w-80 h-80 mt-10 overflow-hidden">
-          <Image src={avatar} alt="deved" layout="fill" objectFit="cover" />
-        </div>
-      </section>
+    <main className="overflow-x-hidden">
+      {/* ══════════ HERO ══════════ */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 pb-10">
+        <ParticleBackground />
 
-      {/* <section>
-        <div>
-          <h3 className="text-3xl py-1 dark:text-white ">Services I offer</h3>
-          <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-            Since the beginning of my journey as a freelance designer and developer, I've done remote work for
-            <span className="text-teal-500"> agencies </span>
-            consulted for <span className="text-teal-500">startups </span>
-            and collaborated with talanted people to create digital products for both business and consumer use.
-          </p>
-          <p className="text-md py-2 leading-8 text-gray-800 dark:text-gray-200">
-            I offer from a wide range of services, including brand design, programming and teaching.
-          </p>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-teal-500/5 blur-[120px]" />
+          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[80px]" />
         </div>
-        <div className="lg:flex gap-10">
-          <div className="text-center shadow-lg p-10 rounded-xl my-10  dark:bg-white flex-1">
-            <Image src={design} width={100} height={100} />
-            <h3 className="text-lg font-medium pt-8 pb-2  ">Beautiful Designs</h3>
-            <p className="py-2">Creating elegant designs suited for your needs following core design theory.</p>
-            <h4 className="py-4 text-teal-600">Design Tools I Use</h4>
-            <p className="text-gray-800 py-1">Photoshop</p>
-            <p className="text-gray-800 py-1">Illustrator</p>
-            <p className="text-gray-800 py-1">Figma</p>
-            <p className="text-gray-800 py-1">Indesign</p>
-          </div>
-          <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
-            <Image src={code} width={100} height={100} />
-            <h3 className="text-lg font-medium pt-8 pb-2 ">Code your dream project</h3>
-            <p className="py-2">Do you have an idea for your next great website? Let's make it a reality.</p>
-            <h4 className="py-4 text-teal-600">Design Tools I Use</h4>
-            <p className="text-gray-800 py-1">Photoshop</p>
-            <p className="text-gray-800 py-1">Illustrator</p>
-            <p className="text-gray-800 py-1">Figma</p>
-            <p className="text-gray-800 py-1">Indesign</p>
-          </div>
-          <div className="text-center shadow-lg p-10 rounded-xl my-10 dark:bg-white flex-1">
-            <Image src={consulting} width={100} height={100} />
-            <h3 className="text-lg font-medium pt-8 pb-2 ">Consulting</h3>
-            <p className="py-2">
-              Are you interested in feedback for your current project? I can give you tips and tricks to level it up.
-            </p>
-            <h4 className="py-4 text-teal-600">Design Tools I Use</h4>
-            <p className="text-gray-800 py-1">Photoshop</p>
-            <p className="text-gray-800 py-1">Illustrator</p>
-            <p className="text-gray-800 py-1">Figma</p>
-            <p className="text-gray-800 py-1">Indesign</p>
-          </div>
-        </div>
-      </section> */}
 
-      <section className="py-10">
-        <div>
-          <h3 className="text-3xl py-1 dark:text-white">Portofolio</h3>
-          <p className="text-md py-2 text-gray-800 dark:text-gray-200">
-            Since the beginning of my freelance career, I have primarily built portfolio projects using React and React
-            Native. Although some projects were developed using Flutter or other technologies, they are not listed here.
-            I&rsquo;ve worked remotely for companies and as a freelancer, as well as on-site in Lebanon and KSA,
-            collaborating with talented individuals to create innovative digital products for both business and consumer
-            use.
-          </p>
-          <p className="text-md py-2 text-gray-800 dark:text-gray-200">Explore a sample of my work below.</p>
-        </div>
-        <div className="flex flex-col gap-10 py-10 lg:flex-row lg:flex-wrap">
-          {portfolio.map((item, index) => (
-            <div key={index} onClick={() => handleImageClick(item.website)} className="basis-1/3 flex-1 cursor-pointer">
-              <Image
-                className="object-contain rounded-xl border-1.5 w-full h-96"
-                width={400}
-                height={256}
-                src={item.src}
-                alt={item.alt}
-              />
-              <div className="py-4 px-2 md:p-4">
-                <p className="text-lg font-semibold dark:text-white">{item.title}</p>
-                <p className="text-gray-600 mt-2 dark:text-gray-400">{item.description}</p>
+        <div className="relative z-10 flex flex-col items-center gap-6 max-w-3xl mx-auto">
+          {/* Availability badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal-500/25 bg-teal-500/8 text-teal-500 dark:text-teal-400 text-xs font-medium"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+            {tx.hero_badge}
+          </motion.div>
+
+          {/* Avatar */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ animation: "float 6s ease-in-out infinite" }}
+          >
+            <div className="glow-ring w-36 h-36 rounded-full p-[3px] bg-gradient-to-br from-teal-500 via-cyan-400 to-indigo-500">
+              <div className="w-full h-full rounded-full overflow-hidden" style={{ background: "var(--card-bg)" }}>
+                <Image
+                  src={avatar}
+                  alt="Roy El Hayek"
+                  width={144}
+                  height={144}
+                  className="object-cover w-full h-full"
+                  style={{ objectPosition: "center 20%" }}
+                  priority
+                />
               </div>
             </div>
-          ))}
+          </motion.div>
 
-          <div className="basis-1/3 flex-1"></div>
+          {/* Name with scramble effect */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="text-5xl md:text-7xl font-bold tracking-tight"
+          >
+            <span className="gradient-text inline-block">
+              <ScrambleText text="Roy El Hayek" startDelayFrames={6} />
+            </span>
+          </motion.h1>
+
+          {/* Typewriter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-xl md:text-2xl font-light h-8"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            <TypeAnimation
+              key={lang}
+              sequence={tx.type}
+              wrapper="span"
+              repeat={Infinity}
+              className="text-teal-500 dark:text-teal-400"
+            />
+          </motion.div>
+
+          {/* Bio */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="leading-relaxed max-w-xl text-sm md:text-base"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {tx.hero_bio_1}{" "}
+            <span className="text-teal-500 dark:text-teal-400 font-medium">{tx.hero_bio_highlight}</span>{" "}
+            {tx.hero_bio_2}
+          </motion.p>
+
+          {/* CTAs with magnetic effect */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="flex flex-wrap items-center justify-center gap-4"
+          >
+            <Magnetic strength={0.35}>
+              <a
+                href="#portfolio"
+                className="group relative px-7 py-3 rounded-xl text-sm font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(20,184,166,0.4)]"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-teal-600 to-cyan-600 transition-all duration-300 group-hover:from-teal-500 group-hover:to-cyan-500" />
+                <span className="relative">{tx.hero_cta}</span>
+              </a>
+            </Magnetic>
+
+            <Magnetic strength={0.25}>
+              <a
+                href="https://www.linkedin.com/in/roy-el-hayek-74979b152/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium border transition-all duration-300 hover:text-teal-500 hover:border-teal-500/40"
+                style={{ color: "var(--text-secondary)", borderColor: "var(--card-border)" }}
+              >
+                <AiFillLinkedin className="text-lg" />
+                {tx.hero_linkedin}
+              </a>
+            </Magnetic>
+          </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs"
+          style={{ color: "var(--text-muted)" }}
+        >
+          <span>{tx.hero_scroll}</span>
+          <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}>
+            <FiArrowDown />
+          </motion.div>
+        </motion.div>
       </section>
+
+      {/* ══════════ ABOUT ══════════ */}
+      <RevealSection id="about" className="max-w-6xl mx-auto px-6 md:px-10 py-20">
+        <AnimatedDivider className="mb-16" />
+
+        <div className="grid md:grid-cols-2 gap-14 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="text-teal-500 dark:text-teal-400 text-sm font-medium tracking-widest uppercase mb-3">
+              {tx.about_label}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-snug" style={{ color: "var(--text-primary)" }}>
+              {tx.about_title_1} <span className="gradient-text">{tx.about_title_highlight}</span> {tx.about_title_2}
+            </h2>
+            <p className="leading-relaxed mb-4 text-sm md:text-base" style={{ color: "var(--text-secondary)" }}>
+              {tx.about_p1}
+            </p>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--text-secondary)" }}>
+              {tx.about_p2}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="text-xs font-medium tracking-widest uppercase mb-5" style={{ color: "var(--text-muted)" }}>
+              {tx.about_tech}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {skills.map(({ icon, label }, i) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, scale: 0.7, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.06, type: "spring", stiffness: 220, damping: 18 }}
+                  whileHover={{ y: -4, scale: 1.05 }}
+                  className="skill-badge flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm"
+                >
+                  <span className="text-teal-500 dark:text-teal-400 text-base">{icon}</span>
+                  {label}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </RevealSection>
+
+      {/* ══════════ TECH MARQUEE ══════════ */}
+      <TechMarquee />
+
+      {/* ══════════ PORTFOLIO ══════════ */}
+      <Portfolio portfolio={portfolio} tx={tx} />
+
+      {/* ══════════ EXPERIENCE ══════════ */}
+      <Experience experiences={tx.experiences} tx={tx} />
+
+      {/* ══════════ CONTACT ══════════ */}
+      <ContactForm />
     </main>
   );
 }

@@ -2,20 +2,29 @@
 
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useState } from "react";
+import CustomCursor from "./CustomCursor";
+import { AppProvider, useApp } from "@/context/AppContext";
 
-const Layout = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+function LayoutInner({ children }) {
+  const { darkMode } = useApp();
+
+  // Render nothing until theme is detected (avoids flash)
+  if (darkMode === null) return null;
 
   return (
-    <div className={darkMode ? "dark" : ""}>
-      <main className={`bg-white px-8 dark:bg-gray-900 md:px-20 lg:px-40`}>
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <main>{children}</main>
-        <Footer />
-      </main>
+    <div className={`${darkMode ? "dark" : ""} ambient-bg min-h-screen transition-colors duration-300`}>
+      <CustomCursor />
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
     </div>
   );
-};
+}
+
+const Layout = ({ children }) => (
+  <AppProvider>
+    <LayoutInner>{children}</LayoutInner>
+  </AppProvider>
+);
 
 export default Layout;
