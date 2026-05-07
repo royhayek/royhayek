@@ -7,12 +7,8 @@ export default function ParticleBackground() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Skip particles entirely on touch/mobile — canvas + tsparticles is too heavy
-    if (
-      window.innerWidth < 768 ||
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0
-    ) {
+    // Skip particles entirely on touch/mobile - canvas + tsparticles is too heavy
+    if (window.innerWidth < 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0) {
       return;
     }
     initParticlesEngine(async (engine) => {

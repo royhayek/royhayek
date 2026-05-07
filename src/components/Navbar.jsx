@@ -8,14 +8,16 @@ import { useApp } from "@/context/AppContext";
 import { t } from "@/lib/translations";
 
 const Navbar = () => {
-  const { darkMode, toggleTheme, lang, setLanguage } = useApp();
+  const { darkMode, toggleTheme, lang, setLanguage, mode } = useApp();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const tx = t[lang];
-  const cvFile = lang === "fr"
-    ? "/docs/CV_Roy_El_Hayek_CDI_FR.pdf"
-    : "/docs/CV_Roy_El_Hayek_CDI_EN.pdf";
+  const cvFile = mode === "intern"
+    ? "/docs/cv.pdf"
+    : lang === "fr"
+      ? "/docs/CV_Roy_El_Hayek_CDI_FR.pdf"
+      : "/docs/CV_Roy_El_Hayek_CDI_EN.pdf";
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);

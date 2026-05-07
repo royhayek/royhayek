@@ -1,11 +1,14 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [darkMode, setDarkMode] = useState(null);
   const [lang, setLang] = useState("fr");
+  const pathname = usePathname();
+  const mode = pathname === "/intern" ? "intern" : "cdi";
 
   useEffect(() => {
     // Theme: stored preference or system default
@@ -34,7 +37,7 @@ export function AppProvider({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ darkMode, toggleTheme, lang, setLanguage }}>
+    <AppContext.Provider value={{ darkMode, toggleTheme, lang, setLanguage, mode }}>
       {children}
     </AppContext.Provider>
   );

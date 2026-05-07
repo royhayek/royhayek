@@ -9,7 +9,7 @@ import AnimatedDivider from "./AnimatedDivider";
 function ProjectCard({ item, index, viewLabel }) {
   const cardRef = useRef(null);
 
-  // 3-D tilt on hover (desktop only — no touch events on mobile)
+  // 3-D tilt on hover (desktop only - no touch events on mobile)
   const onMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -37,7 +37,7 @@ function ProjectCard({ item, index, viewLabel }) {
         style={{ transition: "transform 0.25s ease, box-shadow 0.3s ease", transformStyle: "preserve-3d" }}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
-        onClick={() => window.open(item.website, "_blank")}
+        onClick={() => item.website && window.open(item.website, "_blank")}
       >
         {/* Image */}
         <div className="relative overflow-hidden h-52 sm:h-80" style={{ background: "var(--card-bg)" }}>

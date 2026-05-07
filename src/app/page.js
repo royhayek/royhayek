@@ -23,15 +23,16 @@ import ScrambleText from "@/components/ScrambleText";
 import Magnetic from "@/components/Magnetic";
 
 // ParticleBackground and ContactForm need ssr:false (browser-only APIs: canvas, emailjs)
-// Portfolio/Experience are content sections — must be SSR'd so the HTML exists before JS loads
+// Portfolio/Experience are content sections - must be SSR'd so the HTML exists before JS loads
 const ParticleBackground = dynamic(() => import("@/components/ParticleBackground"), { ssr: false });
 const TechMarquee = dynamic(() => import("@/components/TechMarquee"), { ssr: false });
 const Portfolio = dynamic(() => import("@/components/Portfolio"));
 const Experience = dynamic(() => import("@/components/Experience"));
 const ContactForm = dynamic(() => import("@/components/ContactForm"), { ssr: false });
 import { useApp } from "@/context/AppContext";
-import { t } from "@/lib/translations";
+import { t, internOverrides } from "@/lib/translations";
 
+import web7 from "../../public/web7.png";
 import web1 from "../../public/web1.png";
 import web2 from "../../public/web2.png";
 import mob1 from "../../public/mob1.png";
@@ -45,8 +46,9 @@ import mob8 from "../../public/mob8.png";
 import mob9 from "../../public/mob9.png";
 import avatar from "../../public/avatar.jpg";
 
-const portfolioImages = [mob9, mob8, web1, mob7, mob1, mob2, web2, mob3, mob4, mob5, mob6];
+const portfolioImages = [web7, mob9, mob8, web1, mob7, mob1, mob2, web2, mob3, mob4, mob5, mob6];
 const portfolioWebsites = [
+  "https://intelliconvo.com/",
   "https://apps.apple.com/fr/app/buitanda/id1500280115",
   "https://www.mojo.com.lb/",
   "https://www.aljaziratadawul.com/",
@@ -77,8 +79,8 @@ const skills = [
 
 /* ─── Page ─── */
 export default function Home() {
-  const { lang } = useApp();
-  const tx = t[lang];
+  const { lang, mode } = useApp();
+  const tx = mode === "intern" ? { ...t[lang], ...internOverrides[lang] } : t[lang];
 
   const portfolio = tx.projects.map((proj, i) => ({
     ...proj,

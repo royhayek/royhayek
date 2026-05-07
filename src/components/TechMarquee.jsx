@@ -51,7 +51,7 @@ export default function TechMarquee() {
       <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-[var(--bg)] to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-[var(--bg)] to-transparent" />
 
-      {/* Pure CSS marquee — zero JS, GPU-composited transform */}
+      {/* Pure CSS marquee - zero JS, GPU-composited transform */}
       <div className="flex w-max" style={{ animation: "marquee 35s linear infinite" }}>
         <Row />
         <Row />
