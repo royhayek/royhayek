@@ -14,7 +14,9 @@ const Navbar = () => {
 
   const tx = t[lang];
   const cvFile = mode === "intern"
-    ? "/docs/cv.pdf"
+    ? lang === "fr"
+      ? "/docs/CV_Roy_El_Hayek_FR.pdf"
+      : "/docs/CV_Roy_El_Hayek_EN.pdf"
     : lang === "fr"
       ? "/docs/CV_Roy_El_Hayek_CDI_FR.pdf"
       : "/docs/CV_Roy_El_Hayek_CDI_EN.pdf";
